@@ -879,10 +879,11 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   /* Align both lamp and card side-by-side in one view on mobile */
   .lamp-assembly {
     left: 6% !important;
-    transform: none !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    bottom: auto !important;
     width: 100px !important;
     height: 48vh !important;
-    bottom: 8vh !important;
   }
   .lamp-base {
     width: 60px !important;
@@ -908,15 +909,17 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   }
   .light-cone {
     left: calc(6% + 40px) !important;
-    transform: scaleX(0) !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) scaleX(0) !important;
     transform-origin: left center !important;
     width: 85% !important;
-    height: 75vh !important;
-    background: radial-gradient(circle at 0% 25%, rgba(16, 185, 129, 0.28) 0%, rgba(139, 92, 246, 0.08) 35%, transparent 70%) !important;
-    clip-path: polygon(0 25%, 100% 0, 100% 100%, 0 100%) !important;
+    height: 48vh !important;
+    background: radial-gradient(circle at 0% 30px, rgba(16, 185, 129, 0.28) 0%, rgba(139, 92, 246, 0.08) 35%, transparent 70%) !important;
+    clip-path: polygon(0 30px, 100% 0, 100% 100%, 0 100%) !important;
   }
   .lamp-assembly.on ~ .light-cone {
-    transform: scaleX(1) !important;
+    transform: translateY(-50%) scaleX(1) !important;
   }
   
   /* Place greeting card on the right, scaled appropriately to fit in viewport */
