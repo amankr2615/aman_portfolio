@@ -3,3 +3,14 @@
 .tempmediaStorage/
 scratch/
 node_modules/
+
+# Development backups and logs
+demo1/
+demo2_pre_strategist_backup/
+conversation_summary.md
+job_outreach_battle_kit.md
+circle.mov
+
+# Source files not required for portfolio site
+MTECH PROJECT/Codes/
+MTECH PROJECT/RESULT and Datasets/MTP_Final.mp4
