@@ -304,11 +304,13 @@ document.addEventListener("DOMContentLoaded", () => {
     projectShowroom.classList.add("active");
     playBeep(900, 0.15, "sine");
     
-    // Dynamically load the video source on first open (deferring loading from main page load)
-    const videoSource = document.getElementById("video-source");
-    if (aerovitVideo && videoSource && !videoSource.src) {
-      videoSource.src = videoSource.getAttribute("data-src");
-      aerovitVideo.load();
+    // Dynamically load the video source on first open by setting src directly on video element
+    if (aerovitVideo && !aerovitVideo.src) {
+      const dataSrc = aerovitVideo.getAttribute("data-src");
+      if (dataSrc) {
+        aerovitVideo.src = dataSrc;
+        aerovitVideo.load();
+      }
     }
     
     // Play video directly on user interaction thread to bypass browser autoplay blocks

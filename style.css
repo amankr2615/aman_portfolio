@@ -693,6 +693,7 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   border-radius: 8px;
   line-height: 1.5;
   font-size: 0.92rem;
+  text-align: justify;
 }
 
 .msg-bubble.bot {
@@ -892,8 +893,10 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
     border-bottom: none !important;
   }
   .lamp-pole {
-    width: 4px !important;
+    width: 6px !important;
     height: calc(48vh - 70px) !important;
+    background: linear-gradient(90deg, #4b5563, #9ca3af, #1f2937) !important;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.15) !important;
   }
   .lamp-shade {
     width: 80px !important;
@@ -926,15 +929,16 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   .revealed-content {
     right: 4% !important;
     left: auto !important;
-    bottom: 12vh !important;
-    transform: translateX(20px) !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) translateX(20px) !important;
     width: 62% !important;
     max-width: 250px !important;
     padding: 1rem !important;
     border-radius: 12px !important;
   }
   .lamp-assembly.on ~ .revealed-content {
-    transform: translateX(0) !important;
+    transform: translateY(-50%) translateX(0) !important;
   }
   .revealed-content .intro-name {
     font-size: 1.6rem !important;
@@ -1366,6 +1370,15 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   }
   .showroom-modal {
     height: 95vh;
+  }
+  .metric-number {
+    font-size: 1.15rem !important;
+  }
+  .metric-label {
+    font-size: 0.65rem !important;
+  }
+  .metrics-highlight-grid {
+    gap: 0.5rem !important;
   }
 }
 
