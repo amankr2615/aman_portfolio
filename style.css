@@ -908,7 +908,9 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
     bottom: -10px !important;
   }
   .lamp-cord {
-    height: calc(100% - 40px) !important;
+    height: 80px !important;
+    top: 30px !important;
+    right: 38px !important;
   }
   .light-cone {
     left: calc(6% + 40px) !important;
@@ -998,24 +1000,27 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 }
 
 .spinning-circle-loader {
-  display: inline-block;
-  vertical-align: middle;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   width: 48px;
   height: 48px;
   margin-left: 0.8rem;
   position: relative;
+  vertical-align: middle;
 }
 
 .spinning-circle-loader .loader-bolt {
-  position: absolute;
-  top: 50%;
-  left: 52%;
-  transform: translate(-50%, -50%);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: var(--color-neon-green);
   text-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
   z-index: 2;
   line-height: 1;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: static !important;
+  transform: none !important;
 }
 
 .spinning-circle-loader .circle-line {
