@@ -1116,9 +1116,9 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 }
 
 .showroom-modal {
-  width: 92%;
-  max-width: 1200px;
-  height: 85vh;
+  width: 90%;
+  max-width: 1000px;
+  height: 78vh;
   background: #080d16; /* Solid dark background to prevent overlap transparency issue */
   border: 1.5px solid rgba(16, 185, 129, 0.25); /* Cyan/Green border glow */
   border-radius: 12px;
