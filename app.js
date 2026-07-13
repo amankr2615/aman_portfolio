@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnNavProjects.addEventListener("click", openShowroom);
   btnCloseShowroom.addEventListener("click", closeShowroom);
 
-  // Architecture Modal Setup
+  // Architecture Modal Setup (AeroViT & KPI Projects)
   const achAerovit = document.getElementById("ach-aerovit");
   const architectureModal = document.getElementById("architecture-modal");
   const closeArchitectureBtn = document.getElementById("close-architecture-btn");
@@ -352,6 +352,29 @@ document.addEventListener("DOMContentLoaded", () => {
     architectureModal.addEventListener("click", (e) => {
       if (e.target === architectureModal) {
         architectureModal.classList.remove("active");
+        playBeep(400, 0.1, "triangle");
+      }
+    });
+  }
+
+  const achKpi = document.getElementById("ach-kpi");
+  const kpiArchitectureModal = document.getElementById("kpi-architecture-modal");
+  const closeKpiArchitectureBtn = document.getElementById("close-kpi-architecture-btn");
+
+  if (achKpi && kpiArchitectureModal && closeKpiArchitectureBtn) {
+    achKpi.addEventListener("click", () => {
+      kpiArchitectureModal.classList.add("active");
+      playBeep(850, 0.1, "sine");
+    });
+
+    closeKpiArchitectureBtn.addEventListener("click", () => {
+      kpiArchitectureModal.classList.remove("active");
+      playBeep(400, 0.1, "triangle");
+    });
+
+    kpiArchitectureModal.addEventListener("click", (e) => {
+      if (e.target === kpiArchitectureModal) {
+        kpiArchitectureModal.classList.remove("active");
         playBeep(400, 0.1, "triangle");
       }
     });
