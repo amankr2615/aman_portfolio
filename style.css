@@ -837,14 +837,27 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 
 /* Responsive grid changes */
 @media (max-width: 900px) {
+  body, html {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+  }
+  .landing-container {
+    position: fixed !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
   .rpg-dashboard {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    overflow-y: auto;
-    height: auto;
-    min-height: 100vh;
-    padding: 1rem;
-    gap: 1rem;
+    position: relative !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 1rem !important;
+    gap: 1.2rem !important;
   }
   .rpg-top-bar {
     grid-column: 1;
@@ -862,6 +875,37 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   .rpg-panel {
     height: auto;
     overflow: visible;
+  }
+  /* Center lamp on mobile */
+  .lamp-assembly {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    height: 52vh !important;
+  }
+  .light-cone {
+    left: 50% !important;
+    transform: translateX(-50%) scaleX(0) !important;
+    transform-origin: top center !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background: radial-gradient(circle at 50% 25%, rgba(16, 185, 129, 0.3) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 80%) !important;
+    clip-path: none !important;
+  }
+  .lamp-assembly.on ~ .light-cone {
+    transform: translateX(-50%) scaleX(1) !important;
+  }
+  /* Center revealed greeting card on mobile */
+  .revealed-content {
+    right: auto !important;
+    left: 50% !important;
+    bottom: 5vh !important;
+    transform: translate(-50%, 15px) !important;
+    width: 92% !important;
+    max-width: 440px !important;
+    padding: 1.4rem !important;
+  }
+  .lamp-assembly.on ~ .revealed-content {
+    transform: translate(-50%, 0) !important;
   }
 }
 
@@ -1830,6 +1874,15 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6rem;
+  }
+  /* Stack education details on phone viewports */
+  .education-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.6rem !important;
+  }
+  .edu-right {
+    align-items: flex-start !important;
   }
 }
 
