@@ -656,6 +656,17 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   border-color: rgba(16, 185, 129, 0.2);
 }
 
+.clickable-ach {
+  cursor: pointer;
+}
+
+.clickable-ach:hover {
+  background: rgba(16, 185, 129, 0.08) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
+  transform: translateY(-1px);
+}
+
 .ach-icon {
   font-size: 1.1rem;
 }

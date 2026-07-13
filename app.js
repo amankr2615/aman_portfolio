@@ -333,6 +333,30 @@ document.addEventListener("DOMContentLoaded", () => {
   btnNavProjects.addEventListener("click", openShowroom);
   btnCloseShowroom.addEventListener("click", closeShowroom);
 
+  // Architecture Modal Setup
+  const achAerovit = document.getElementById("ach-aerovit");
+  const architectureModal = document.getElementById("architecture-modal");
+  const closeArchitectureBtn = document.getElementById("close-architecture-btn");
+
+  if (achAerovit && architectureModal && closeArchitectureBtn) {
+    achAerovit.addEventListener("click", () => {
+      architectureModal.classList.add("active");
+      playBeep(850, 0.1, "sine");
+    });
+
+    closeArchitectureBtn.addEventListener("click", () => {
+      architectureModal.classList.remove("active");
+      playBeep(400, 0.1, "triangle");
+    });
+
+    architectureModal.addEventListener("click", (e) => {
+      if (e.target === architectureModal) {
+        architectureModal.classList.remove("active");
+        playBeep(400, 0.1, "triangle");
+      }
+    });
+  }
+
   // Tab switching
   tabButtons.forEach(btn => {
     btn.addEventListener("click", () => {

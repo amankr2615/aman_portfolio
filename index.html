@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aman Kumar | High-Agency AI Explorer</title>
   <meta name="description" content="RPG Character Sheet and Mindset Portfolio of Aman Kumar, M.Tech IIT Patna. Specializing in autonomous multi-agent engineering and deep computer vision.">
-  <link rel="stylesheet" href="style.css?v=67">
+  <link rel="stylesheet" href="style.css?v=69">
 </head>
 <body>
 
@@ -125,11 +125,11 @@
           </div>
         </div>
         
-        <div class="ach-item">
+        <div class="ach-item clickable-ach" id="ach-aerovit" title="Click to view System Architecture">
           <span class="ach-icon">⚡</span>
           <div class="ach-info">
             <span class="ach-name">Aerial Anomaly Detection (ViT-CNN)</span>
-            <span class="ach-desc">Slashed spatial AeroViT overhead by 58x</span>
+            <span class="ach-desc">Slashed spatial AeroViT overhead by 58x (Click to view architecture)</span>
           </div>
         </div>
         
@@ -507,6 +507,56 @@
     </div>
   </div>
 
+  <!-- AeroViT Architecture Modal -->
+  <div id="architecture-modal" class="showroom-overlay">
+    <div class="showroom-modal architecture-modal-content" style="border-color: var(--color-neon-green); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(16, 185, 129, 0.15);">
+      <div class="showroom-header">
+        <div class="showroom-title-bar">
+          <span class="showroom-icon">📐</span>
+          <h3 class="showroom-title" style="color: var(--color-neon-green); text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);">AeroViT SYSTEM ARCHITECTURE</h3>
+        </div>
+        <button id="close-architecture-btn" class="showroom-close-btn">&times;</button>
+      </div>
+      <div class="showroom-body architecture-modal-body" style="padding: 1.8rem 2.2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1.5rem;">
+        <p class="architecture-description" style="font-size: 0.85rem; line-height: 1.55; color: var(--color-text-bright); margin: 0; border-left: 2px solid var(--color-neon-green); padding-left: 1rem; text-align: justify; font-family: var(--font-body);">
+          Designed and developed an AI-powered aerial surveillance platform that combines computer vision, spectral analysis, physics-based tracking, and explainable AI to detect, validate, and interpret anomalous vehicle behavior from drone video streams.
+        </p>
+        
+        <div class="flowchart-box" style="background: rgba(0, 0, 0, 0.5); border: 1.5px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1.8rem 1.2rem; overflow-x: auto; box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.08); display: flex; justify-content: center; align-items: center;">
+          <pre class="flowchart-ascii" style="font-family: var(--font-retro); font-size: 0.82rem; line-height: 1.35; color: var(--color-neon-green); text-shadow: 0 0 6px rgba(16, 185, 129, 0.55); margin: 0; white-space: pre; text-align: left; letter-spacing: 0.5px;">
+     A3F-ViT Intelligent Surveillance Platform
+
+               Raw Drone Video
+                      |
+                      ▼
+          Object Detection (YOLOv8)
+                      |
+                 +----+----+
+                 |         |
+                 ▼         ▼
+          Frequency Filter   ViT + CNN
+              (FFT)       Feature Learning
+                 |         |
+                 +----+----+
+                      |
+                      ▼
+           Physics Validation (EKF)
+                      |
+                      ▼
+          Multi-Signal Fusion Engine
+                      |
+                 +----+----+
+                 |         |
+                 ▼         ▼
+          Threat Classification   Explainable Report
+                 |                  (RAG + LLM)
+                 ▼
+          Tactical Dashboard</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Image Lightbox Overlay -->
   <div id="image-lightbox" class="lightbox-overlay">
     <span class="lightbox-close-btn">&times;</span>
@@ -514,6 +564,6 @@
     <div id="lightbox-caption" class="lightbox-caption"></div>
   </div>
 
-  <script src="app.js?v=64"></script>
+  <script src="app.js?v=69"></script>
 </body>
 </html>
