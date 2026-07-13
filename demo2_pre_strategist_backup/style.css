@@ -1,0 +1,766 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=Share+Tech+Mono&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+  --color-dark-bg: #050608;
+  --color-panel-bg: rgba(13, 16, 23, 0.85);
+  --color-neon-green: #10B981;
+  --color-neon-purple: #A78BFA;
+  --color-warm-light: rgba(253, 224, 71, 0.15);
+  --color-text-bright: #F3F4F6;
+  --color-text-dark: #6B7280;
+  
+  --font-title: 'Space Grotesk', sans-serif;
+  --font-retro: 'Share Tech Mono', monospace;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'Inter', sans-serif;
+  
+  --transition-fast: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='5 3 19 12 12 13 9 21 5 3'/%3E%3C/svg%3E"), auto !important;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-text-bright);
+  font-family: var(--font-body);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+.space-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+    radial-gradient(2px 2px at 50px 160px, #ddd, transparent),
+    radial-gradient(2px 2px at 90px 40px, #fff, transparent),
+    radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 160px 120px, #ddd, transparent);
+  background-size: 200px 200px;
+  animation: bgScroll 120s linear infinite;
+  pointer-events: none;
+}
+
+.landing-container.lamp-on .space-bg {
+  opacity: 0.25;
+}
+
+@keyframes bgScroll {
+  from { background-position: 0 0; }
+  to { background-position: 1000px 1000px; }
+}
+
+/* --- LAMP LANDING PAGE (DEMO 5 STYLE) --- */
+.landing-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #030406;
+  transition: var(--transition-medium);
+}
+
+.landing-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+/* Floor Lamp Layout */
+.lamp-assembly {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 260px;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 12;
+}
+
+.lamp-shade {
+  width: 200px;
+  height: 100px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-radius: 100px 100px 0 0;
+  border: 4px solid #334155;
+  border-bottom: 6px solid #475569;
+  position: relative;
+  box-shadow: inset 0 8px 16px rgba(255,255,255,0.05);
+}
+
+.lamp-bulb {
+  width: 50px;
+  height: 50px;
+  background: #334155;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -25px;
+  left: 71px;
+  transition: var(--transition-fast);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.lamp-cord {
+  width: 4px;
+  height: 150px;
+  background: #475569;
+  position: absolute;
+  right: 40px;
+  top: 90px;
+  transform-origin: top center;
+  transition: transform 0.15s ease-out;
+  cursor: pointer;
+  animation: sway 5s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(1.5deg); }
+  50% { transform: rotate(-1.5deg); }
+}
+
+.lamp-handle {
+  width: 16px;
+  height: 26px;
+  background: #fbbf24;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 0;
+  left: -6px;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+}
+
+.lamp-pole {
+  width: 8px;
+  height: calc(80vh - 100px);
+  background: linear-gradient(90deg, #1e293b, #475569, #0f172a);
+}
+
+.lamp-base {
+  width: 180px;
+  height: 20px;
+  background: #0f172a;
+  border: 4px solid #334155;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Light cone casting to the right */
+.light-cone {
+  position: absolute;
+  bottom: 0;
+  left: calc(10% + 96px); /* starts exactly from bulb center */
+  width: 85%;
+  height: 80vh;
+  background: radial-gradient(circle at 0% 25%, rgba(253, 224, 71, 0.3) 0%, rgba(253, 224, 71, 0.08) 45%, rgba(253, 224, 71, 0) 75%);
+  clip-path: polygon(0 25%, 100% 0, 100% 100%, 0 100%);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: opacity 0.3s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 11;
+}
+
+/* Lamp Activated States */
+.lamp-assembly.on .lamp-bulb {
+  background: #fef08a;
+  box-shadow: 0 0 45px #fef08a, 0 0 90px #fef08a;
+}
+
+.lamp-assembly.on ~ .light-cone {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Content revealed under lamp on the right side */
+.revealed-content {
+  position: absolute;
+  right: 12%;
+  bottom: 22vh;
+  text-align: left;
+  z-index: 13;
+  pointer-events: none;
+  max-width: 550px;
+  padding: 2rem;
+}
+
+.revealed-content > * {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lamp-assembly.on ~ .revealed-content {
+  pointer-events: auto;
+}
+
+.lamp-assembly.on ~ .revealed-content > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.lamp-assembly.on ~ .revealed-content .intro-greeting {
+  transition-delay: 0.3s;
+}
+
+.lamp-assembly.on ~ .revealed-content .intro-name {
+  transition-delay: 0.45s;
+}
+
+.lamp-assembly.on ~ .revealed-content .intro-badge {
+  transition-delay: 0.6s;
+}
+
+.lamp-assembly.on ~ .revealed-content .btn-wrapper {
+  transition-delay: 0.75s;
+}
+
+.intro-greeting {
+  font-family: var(--font-retro);
+  color: var(--color-neon-green);
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.intro-name {
+  font-family: var(--font-title);
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, #ffffff, #9ca3af);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro-badge {
+  display: inline-block;
+  font-family: var(--font-retro);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  color: var(--color-neon-green);
+  margin-bottom: 2.5rem;
+  font-size: 0.9rem;
+}
+
+.btn-login {
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  padding: 1.1rem 2.5rem;
+  background: var(--color-neon-green);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 
+    0 5px 0 #059669, 
+    0 12px 24px rgba(16, 185, 129, 0.35);
+  transition: all 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  top: 0;
+}
+
+.btn-login:hover {
+  background: #10b981;
+  box-shadow: 
+    0 5px 0 #059669, 
+    0 16px 28px rgba(16, 185, 129, 0.5);
+}
+
+.btn-login:active {
+  top: 5px;
+  box-shadow: 
+    0 0 0 #059669, 
+    0 6px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* --- MAIN RPG CHARACTER BOARD LAYOUT --- */
+.rpg-dashboard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  grid-template-rows: auto 1fr;
+  padding: 2rem;
+  gap: 1.5rem;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: var(--transition-medium);
+  pointer-events: none;
+}
+
+.rpg-dashboard.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* RPG Top Nav Action Panel */
+.rpg-top-bar {
+  grid-column: 1 / span 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(13, 16, 23, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.rpg-system-status {
+  font-family: var(--font-retro);
+  font-size: 0.9rem;
+  color: var(--color-neon-green);
+  letter-spacing: 1px;
+}
+
+.rpg-nav-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.rpg-nav-btn {
+  font-family: var(--font-retro);
+  font-size: 0.85rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-text-bright);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.rpg-nav-btn:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--color-neon-green);
+  color: var(--color-neon-green);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.font-bold-btn {
+  font-weight: 700;
+  border-color: rgba(167, 139, 250, 0.4);
+  color: var(--color-neon-purple);
+}
+
+.font-bold-btn:hover {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--color-neon-purple);
+  color: var(--color-neon-purple);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+/* Common RPG Panels styling */
+.rpg-panel {
+  background: var(--color-panel-bg);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.rpg-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-neon-green), var(--color-neon-purple));
+}
+
+.panel-header-title {
+  font-family: var(--font-retro);
+  font-size: 1rem;
+  color: var(--color-neon-purple);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Left Panel - Avatar & stats */
+.char-details {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.avatar-wrapper {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--color-neon-green);
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+  background: #111827;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.char-name {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.char-title {
+  font-family: var(--font-retro);
+  font-size: 0.9rem;
+  color: var(--color-neon-green);
+}
+
+.char-lvl {
+  font-family: var(--font-retro);
+  font-size: 0.85rem;
+  color: var(--color-text-dark);
+  margin-top: 0.2rem;
+}
+
+/* RPG Stats Bars */
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stat-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-retro);
+  font-size: 0.85rem;
+}
+
+.stat-name {
+  color: var(--color-text-bright);
+}
+
+.stat-val {
+  color: var(--color-neon-green);
+}
+
+.stat-track-bg {
+  height: 8px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-track-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-neon-purple), var(--color-neon-green));
+  width: 0%;
+  transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+  border-radius: 4px;
+}
+
+/* Achievements grid */
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+.ach-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  transition: var(--transition-fast);
+}
+
+.ach-item:hover {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.ach-icon {
+  font-size: 1.1rem;
+}
+
+.ach-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.ach-name {
+  font-weight: 600;
+  color: var(--color-text-bright);
+}
+
+.ach-desc {
+  font-size: 0.72rem;
+  color: var(--color-text-dark);
+}
+
+/* Right Panel - Conversation Q&A Console */
+.dialogue-history {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Message block */
+.msg-bubble {
+  max-width: 85%;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  line-height: 1.5;
+  font-size: 0.92rem;
+}
+
+.msg-bubble.bot {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--color-text-bright);
+  align-self: flex-start;
+  border-top-left-radius: 0;
+}
+
+.msg-bubble.user {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--color-neon-green);
+  align-self: flex-end;
+  border-top-right-radius: 0;
+  font-family: var(--font-retro);
+  font-size: 0.95rem;
+}
+
+/* Quest / Projects layout within dialogue */
+.quest-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.quest-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-bottom: 0.4rem;
+}
+
+.quest-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--color-neon-purple);
+  font-size: 1.05rem;
+}
+
+.quest-status {
+  font-family: var(--font-retro);
+  font-size: 0.8rem;
+  color: var(--color-neon-green);
+}
+
+.quest-desc {
+  font-size: 0.85rem;
+  color: #d1d5db;
+}
+
+.quest-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.quest-tag {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  color: #c084fc;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-family: var(--font-retro);
+}
+
+.quest-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.quest-link {
+  font-family: var(--font-retro);
+  font-size: 0.8rem;
+  color: var(--color-neon-green);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* User options container at the bottom */
+.dialogue-options {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.option-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  text-align: left;
+  font-family: var(--font-retro);
+  color: var(--color-text-bright);
+  font-size: 0.92rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: var(--transition-fast);
+}
+
+.option-btn:hover {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: var(--color-neon-green);
+  padding-left: 1.5rem;
+  color: var(--color-neon-green);
+}
+
+/* Skills dynamic reveal */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.skill-box {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 0.6rem;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-bright);
+}
+
+/* Responsive grid changes */
+@media (max-width: 900px) {
+  .rpg-dashboard {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+  .rpg-panel {
+    height: auto;
+  }
+}
+
+.lamp-prompt {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-retro);
+  color: #fbbf24;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 15px rgba(251, 191, 36, 0.7);
+  animation: pulsePrompt 2.5s infinite;
+  pointer-events: none;
+  text-align: center;
+  z-index: 14;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.lamp-prompt::after {
+  content: ' _';
+  animation: blinkCursor 0.8s steps(2, start) infinite;
+}
+
+@keyframes blinkCursor {
+  to { visibility: hidden; }
+}
+
+@keyframes pulsePrompt {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+.landing-container.lamp-on .lamp-prompt {
+  opacity: 0;
+  transform: translate(-50%, -65%);
+  pointer-events: none;
+  animation: none;
+}
+

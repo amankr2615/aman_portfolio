@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aman Kumar - Resume</title>
+  <style>
+    /* Clean Standard Resume Style Sheet (Print-Ready) */
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      color: #e2e8f0;
+      line-height: 1.4;
+      background-color: #020204;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Recruiter Action Header Bar */
+    .print-header {
+      background: #0d111a;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .print-header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .btn-back-portfolio {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .btn-back-portfolio:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--color-neon-green);
+    }
+    .print-header-title {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .btn-download-pdf {
+      background: #10B981;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s ease;
+    }
+    .btn-download-pdf:hover {
+      background: #059669;
+    }
+
+    /* Resume Paper Page Wrapper */
+    .resume-page {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #080d16;
+      padding: 40px 50px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 12px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background watermark loader lines */
+    .resume-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      z-index: 1; /* Render above parent background */
+      pointer-events: none;
+      opacity: 0.12; /* Slightly increased for high visibility on white background */
+      display: block; /* Removed flex layout, using absolute coordinate offsets */
+    }
+    .resume-watermark .loader-bolt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8rem;
+      color: #10B981;
+      font-family: sans-serif;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+    }
+    .resume-watermark .circle-line {
+      position: absolute;
+      border: 4px double #10B981;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    .resume-watermark .line-1 {
+      width: 700px;
+      height: 700px;
+      top: 0;
+      left: 0;
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      animation: spinCircle 12s linear infinite;
+    }
+    .resume-watermark .line-2 {
+      width: 580px;
+      height: 580px;
+      top: 60px; /* (700 - 580) / 2 */
+      left: 60px;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      animation: spinCircleReverse 10s linear infinite;
+    }
+    .resume-watermark .line-3 {
+      width: 460px;
+      height: 460px;
+      top: 120px; /* (700 - 460) / 2 */
+      left: 120px;
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+      animation: spinCircle 8s linear infinite;
+    }
+    @keyframes spinCircle {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinCircleReverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    /* Content styling (Rendered on top of watermark) */
+    .resume-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Header styling */
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .name {
+      font-size: 26px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 0 0 5px 0;
+      letter-spacing: 1px;
+      color: #10B981;
+    }
+    .contact-info {
+      font-size: 13px;
+      margin: 0;
+      color: #94a3b8;
+    }
+    .resume-page a {
+      color: #fbbf24;
+      text-decoration: underline;
+    }
+    .resume-page a:hover {
+      color: #fbbf24;
+      opacity: 0.8;
+    }
+
+    /* Section styling */
+    .section-title {
+      font-size: 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid rgba(16, 185, 129, 0.3);
+      margin: 20px 0 8px 0;
+      padding-bottom: 2px;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 1;
+      color: #10B981;
+    }
+
+    /* Experience & Education list styling */
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 14px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+      color: #fff;
+    }
+    .item-subheader {
+      display: flex;
+      justify-content: space-between;
+      font-style: italic;
+      font-size: 13.5px;
+      margin-bottom: 5px;
+      position: relative;
+      z-index: 1;
+      color: #a78bfa;
+    }
+    ul {
+      margin: 0 0 10px 0;
+      padding-left: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    li {
+      font-size: 13px;
+      margin-bottom: 4px;
+      text-align: justify;
+      color: #cbd5e1;
+    }
+
+    /* Table styling for Education */
+    .edu-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .edu-table th, .edu-table td {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 6px 10px;
+      font-size: 13px;
+      text-align: left;
+    }
+    .edu-table td {
+      color: #cbd5e1;
+    }
+    .edu-table th {
+      background-color: rgba(16, 185, 129, 0.08);
+      font-weight: bold;
+      color: #fff;
+    }
+
+    /* Skill matrix styling */
+    .skills-list {
+      margin-top: 5px;
+      position: relative;
+      z-index: 1;
+    }
+    .skill-item {
+      font-size: 13px;
+      margin-bottom: 4px;
+      color: #cbd5e1;
+    }
+    .skill-item strong {
+      font-size: 13.5px;
+      color: #a78bfa;
+    }
+
+    /* Print settings override */
+    @media print {
+      body {
+        background-color: #fff !important;
+        color: #000 !important;
+        margin: 0;
+      }
+      .print-header {
+        display: none !important;
+      }
+      .resume-page {
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        border: none;
+      }
+      .name {
+        color: #000 !important;
+      }
+      .section-title {
+        color: #000 !important;
+        border-bottom: 1.5px solid #222 !important;
+      }
+      .item-header {
+        color: #000 !important;
+      }
+      .item-subheader {
+        color: #333 !important;
+      }
+      .contact-info {
+        color: #333 !important;
+      }
+      .resume-page a {
+        color: #000 !important;
+        text-decoration: underline !important;
+      }
+      .edu-table th {
+        background-color: #f9f9f9 !important;
+        color: #000 !important;
+        border: 1px solid #ddd !important;
+      }
+      .edu-table td {
+        color: #000 !important;
+        border: 1px solid #ddd !important;
+      }
+      li {
+        color: #000 !important;
+      }
+      .resume-watermark {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar for Viewers -->
+  <div class="print-header">
+    <div class="print-header-left">
+      <a href="index.html?view=rpg" class="btn-back-portfolio">◀ Back</a>
+      <span class="print-header-title">AMAN KUMAR - RESUME PORTAL</span>
+    </div>
+    <a href="resume.pdf" download="Aman_Kumar_Resume.pdf" class="btn-download-pdf">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Resume
+    </a>
+  </div>
+
+  <!-- Standard Academic/Industry Resume Format -->
+  <div class="resume-page">
+    <div class="resume-watermark">
+      <span class="loader-bolt">⚡</span>
+      <span class="circle-line line-1"></span>
+      <span class="circle-line line-2"></span>
+      <span class="circle-line line-3"></span>
+    </div>
+    
+    <div class="resume-content">
+    
+    <div class="header">
+      <h1 class="name">Aman Kumar</h1>
+      <p class="contact-info">
+        +91-9325815142 &nbsp;|&nbsp; 
+        <a href="mailto:aman.kr2615@gmail.com">aman.kr2615@gmail.com</a> &nbsp;|&nbsp; 
+        <a href="mailto:aman_2411ee27@iitp.ac.in">aman_2411ee27@iitp.ac.in</a>
+      </p>
+      <p class="contact-info" style="margin-top: 2px;">
+        IIT Patna, Bihar &nbsp;|&nbsp;
+        <a href="https://github.com/amankr2615" target="_blank">Github: amankr2615</a> &nbsp;|&nbsp; 
+        <a href="https://linkedin.com/in/aman-kumar-26v15m" target="_blank">linkedin.com/in/aman-kumar-26v15m</a>
+      </p>
+    </div>
+
+    <!-- Education Section -->
+    <div class="section-title">Education</div>
+    <table class="edu-table">
+      <thead>
+        <tr>
+          <th>Degree/Certificate</th>
+          <th>Institute/Board</th>
+          <th>CGPA/Percentage</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>M.Tech. (CSSP)</strong></td>
+          <td>Indian Institute of Technology, Patna</td>
+          <td>7.69</td>
+          <td>2024 - Present</td>
+        </tr>
+        <tr>
+          <td><strong>B.Tech. (ECE)</strong></td>
+          <td>MIT World Peace University, Pune</td>
+          <td>9.48</td>
+          <td>2017 - 2021</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Experience Section -->
+    <div class="section-title">Experience</div>
+    
+    <div class="item-header">
+      <span>Tata Consultancy Services</span>
+      <span>Feb 2022 - July 2023</span>
+    </div>
+    <div class="item-subheader">
+      <span>Assistant System Engineer Trainee</span>
+      <span>Kolkata, India</span>
+    </div>
+    <ul>
+      <li>Optimized SQL based data pipelines to improve data availability for analytics and reporting workflows.</li>
+      <li>Developed automation tools (Java) to streamline reporting processes, reducing manual effort by 20%.</li>
+      <li>Performed data-driven root cause analysis on production systems to identify performance issues and improve reliability.</li>
+      <li>Collaborated in Agile teams to support maintenance and delivery of large-scale production systems.</li>
+      <li>Worked with structured datasets and system logs to support analytical workflows and troubleshooting.</li>
+    </ul>
+
+    <div class="item-header">
+      <span>InfoVision Labs India Pvt. Ltd.</span>
+      <span>Sept 2021</span>
+    </div>
+    <div class="item-subheader">
+      <span>Software Engineer L1, FTE</span>
+      <span>Pune, India</span>
+    </div>
+    <ul>
+      <li>Wrote test cases and debugged Python modules to improve code quality and reliability.</li>
+      <li>Gained practical exposure to software testing lifecycle (STLC).</li>
+    </ul>
+
+    <!-- Projects Section -->
+    <div class="section-title">Projects</div>
+
+    <div class="item-header">
+      <span>Hybrid Neuro-Symbolic Vehicle Anomaly Detection Platform (<a href="https://github.com/amankr2615" target="_blank">Link</a>)</span>
+      <span>Dec 2025 - Present</span>
+    </div>
+    <div class="item-subheader">
+      <span>IIT Patna</span>
+      <span>IIT Patna</span>
+    </div>
+    <ul>
+      <li>Built a vehicle behavioral threat classification system (Normal / Distracted / Aggressive) from aerial footage using fused ViT visual features and physics-based kinematic divergence scoring.</li>
+      <li>Implemented a RAG pipeline using FAISS VectorDB and SQLite for contextual anomaly memory retrieval, historical event search, and incident analysis across sequential video inference.</li>
+      <li>Engineered a tactical surveillance dashboard with live vehicle lock-on, 4× zoom tracking, bearing/range readouts, dual-signal anomaly charts, and real-time threat profiling.</li>
+      <li>Implemented Gemini API-based agentic workflows to generate contextual tactical responses from fused visual and motion signals.</li>
+    </ul>
+
+    <div class="item-header">
+      <span>Autonomous Multi-Agent AI for End-to-End Marketing Decisions (<a href="https://github.com/amankr2615" target="_blank">Github</a>)</span>
+      <span>Dec 2025</span>
+    </div>
+    <div class="item-subheader">
+      <span>IIT Patna</span>
+      <span>IIT Patna</span>
+    </div>
+    <ul>
+      <li>Architected a self-evaluating multi-agent AI platform using Gemini-based LLM orchestration to transform raw marketing data into KPI analysis, forecasting, strategic actions, and risk assessment.</li>
+      <li>Built coordinated AI agents for analysis, forecasting, planning, evaluation, and recommendation refinement; implemented structured JSON-constrained generation with response validation and fault-tolerance.</li>
+      <li>Designed self-refinement and evaluation-feedback pipelines improving reasoning quality across iterative cycles.</li>
+    </ul>
+
+    <div class="item-header">
+      <span>AeroViT: Transformer-CNN Framework for Aerial Anomaly Detection</span>
+      <span>July 2025 - Dec 2025</span>
+    </div>
+    <div class="item-subheader">
+      <span>IIT Patna</span>
+      <span>IIT Patna</span>
+    </div>
+    <ul>
+      <li>Developed a hybrid Transformer-CNN anomaly detection framework achieving 89% AUC and approximately 58× improvement in computational efficiency.</li>
+      <li>Designed hybrid perceptual-loss pipelines combining reconstruction consistency, SSIM, and feature-level anomaly localization.</li>
+      <li>Implemented FFT-based temporal evaluation, motion-consistency analysis, and embedding-space diagnostics.</li>
+    </ul>
+
+    <!-- Technical Skills Section -->
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-list">
+      <div class="skill-item"><strong>Languages & Frameworks:</strong> Python, SQL, JavaScript, HTML/CSS, Java</div>
+      <div class="skill-item"><strong>AI & LLM Engineering:</strong> LLMs & Embeddings, RAG Pipelines, Prompt Engineering, Structured Outputs, Multi-Agent AI Systems, Agentic Workflows</div>
+      <div class="skill-item"><strong>AI/ML Frameworks:</strong> PyTorch, TensorFlow, Scikit-learn, OpenCV, Ultralytics YOLO, Vision Transformers (ViT)</div>
+      <div class="skill-item"><strong>Vector & Data Systems:</strong> FAISS VectorDB, SQLite, Pandas, NumPy, Statistical Analysis, Data Visualization</div>
+      <div class="skill-item"><strong>Domains:</strong> AI-Native Engineering, Computer Vision, Anomaly Detection, Real-Time Analytics, Enterprise AI Systems</div>
+    </div>
+
+    <!-- Achievements Section -->
+    <div class="section-title">Achievements</div>
+    <ul>
+      <li>Qualified GATE 2024</li>
+    </ul>
+    </div><!-- end resume-content -->
+  </div>
+
+</body>
+</html>
