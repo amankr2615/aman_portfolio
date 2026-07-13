@@ -1000,26 +1000,28 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 }
 
 .spinning-circle-loader {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  display: inline-block !important;
+  vertical-align: middle;
   width: 48px;
   height: 48px;
   margin-left: 0.8rem;
   position: relative;
-  vertical-align: middle;
 }
 
 .spinning-circle-loader .loader-bolt {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   font-size: 1.05rem;
   color: var(--color-neon-green);
   text-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
   z-index: 2;
   line-height: 1;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: static !important;
   transform: none !important;
 }
 
