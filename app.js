@@ -34,25 +34,28 @@ const RESPONSES = {
     <p>Before entering IIT Patna, I worked as a Systems Engineer at <strong>Tata Consultancy Services (TCS)</strong> driving complex data pipeline automations, and at <strong>InfoVision Labs</strong> where I debugged and optimized high-performance Python backends.</p>
     <p><strong>My Vision & Trajectory:</strong> I see myself architecting high-agency agentic platforms and robust AI-Native systems that solve critical production constraints. Rather than just applying models, my goal is to design scalable systems that integrate deterministic logic with generative models, enabling true autonomous intelligence in production workflows.</p>
     
-    <div class="vision-roadmap">
-      <div class="roadmap-header">🎯 CORE MISSION PARADIGMS</div>
-      <div class="roadmap-grid">
-        <div class="roadmap-item">
-          <span class="roadmap-marker">01</span>
-          <div class="roadmap-content">
-            <h4>Agentic Networks at Scale</h4>
-            <p>Architecting secure, multi-agent workflows with self-healing, closed-loop execution logic.</p>
+    <div id="about-collapsible" class="collapsible-wrapper collapsed">
+      <div class="vision-roadmap">
+        <div class="roadmap-header">🎯 CORE MISSION PARADIGMS</div>
+        <div class="roadmap-grid">
+          <div class="roadmap-item">
+            <span class="roadmap-marker">01</span>
+            <div class="roadmap-content">
+              <h4>Agentic Networks at Scale</h4>
+              <p>Architecting secure, multi-agent workflows with self-healing, closed-loop execution logic.</p>
+            </div>
           </div>
-        </div>
-        <div class="roadmap-item">
-          <span class="roadmap-marker">02</span>
-          <div class="roadmap-content">
-            <h4>Advanced Computer Vision</h4>
-            <p>Deploying optimized Vision Transformers (ViTs) and real-time detection models in high-throughput pipelines.</p>
+          <div class="roadmap-item">
+            <span class="roadmap-marker">02</span>
+            <div class="roadmap-content">
+              <h4>Advanced Computer Vision</h4>
+              <p>Deploying optimized Vision Transformers (ViTs) and real-time detection models in high-throughput pipelines.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <button id="btn-about-expand" class="console-toggle-btn">VIEW PARADIGMS & VISION 🔓</button>
   `,
   skills: `
     <div class="skills-showcase">
@@ -291,6 +294,17 @@ document.addEventListener("DOMContentLoaded", () => {
     resetDialogueConsole();
   });
 
+  // Static Dossier Card toggle
+  const btnDossierExpand = document.getElementById("btn-dossier-expand");
+  const dossierCollapsible = document.getElementById("dossier-collapsible");
+  if (btnDossierExpand && dossierCollapsible) {
+    btnDossierExpand.addEventListener("click", () => {
+      playBeep(700, 0.08, "triangle");
+      const isCollapsed = dossierCollapsible.classList.toggle("collapsed");
+      btnDossierExpand.textContent = isCollapsed ? "VIEW MORE EDUCATION 🔓" : "COLLAPSE DETAILS 🔒";
+    });
+  }
+
   // Project Showroom Modal Setup
   const projectShowroom = document.getElementById("project-showroom");
   const btnCloseShowroom = document.getElementById("btn-close-showroom");
@@ -481,6 +495,19 @@ document.addEventListener("DOMContentLoaded", () => {
               playBeep(700, 0.08, "triangle");
               const isCollapsed = grid.classList.toggle("collapsed");
               btnExpand.textContent = isCollapsed ? "VIEW MORE CAPABILITIES 🔓" : "COLLAPSE MATRIX 🔒";
+            });
+          }
+        }
+        
+        // Dynamically bind about expand toggle
+        if (type === "about") {
+          const btnExpand = botBubble.querySelector("#btn-about-expand");
+          const collapsible = botBubble.querySelector("#about-collapsible");
+          if (btnExpand && collapsible) {
+            btnExpand.addEventListener("click", () => {
+              playBeep(700, 0.08, "triangle");
+              const isCollapsed = collapsible.classList.toggle("collapsed");
+              btnExpand.textContent = isCollapsed ? "VIEW PARADIGMS & VISION 🔓" : "COLLAPSE PARADIGMS 🔒";
             });
           }
         }

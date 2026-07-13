@@ -2246,3 +2246,39 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   border-radius: 50%;
 }
 
+/* Collapsible Section Mechanics */
+.collapsible-wrapper {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.collapsible-wrapper.collapsed {
+  max-height: 0px !important;
+}
+
+/* Console Expand Toggler Buttons */
+.console-toggle-btn {
+  display: block;
+  margin: 0.8rem auto 0 auto;
+  background: rgba(16, 185, 129, 0.04);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--color-neon-green);
+  font-family: var(--font-retro);
+  font-size: 0.72rem;
+  padding: 0.35rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+}
+
+.console-toggle-btn:hover {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--color-neon-green);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+  transform: translateY(-1px);
+}
+
+
