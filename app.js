@@ -187,21 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isLampOn = false;
 
-  // Check if URL specifies launching directly into the RPG dashboard
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("view") === "rpg") {
-    landingContainer.classList.add("hidden");
-    rpgDashboard.classList.add("active");
-    isLampOn = true;
-    lampAssembly.classList.add("on");
-    landingContainer.classList.add("lamp-on");
-    setTimeout(() => {
-      statFills.forEach(fill => {
-        fill.style.width = fill.dataset.percent + "%";
-      });
-      playBeep(1200, 0.3, "triangle");
-    }, 200);
-  }
+
 
   // Pull Cord Action
   function toggleLamp() {
