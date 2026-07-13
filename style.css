@@ -1326,21 +1326,21 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 }
 
 .pitch-text {
-  font-size: 0.88rem;
-  line-height: 1.5;
+  font-size: 0.76rem;
+  line-height: 1.55;
   color: var(--color-text-bright);
   margin: 0 0 0.4rem 0;
   text-align: justify;
 }
 
 .project-badge-meta {
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   color: var(--color-neon-green);
   border-left: 2px solid var(--color-neon-green);
   padding-left: 0.8rem;
   margin-bottom: 1.5rem;
   font-style: italic;
-  line-height: 1.4;
+  line-height: 1.45;
   opacity: 0.85;
 }
 
@@ -1351,7 +1351,7 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 
 .pitch-subtitle {
   font-family: var(--font-title);
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: var(--color-text-bright);
   margin: 0.8rem 0 0 0;
   letter-spacing: 0.5px;

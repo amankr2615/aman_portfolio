@@ -298,11 +298,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectViews = document.querySelectorAll(".project-view");
   const aerovitVideo = document.getElementById("aerovit-video");
 
+  let videoLoadTimer = null;
+
   function openShowroom() {
     projectShowroom.classList.add("active");
     playBeep(900, 0.15, "sine");
+    
+    // Clear any previous loading timer
+    if (videoLoadTimer) clearTimeout(videoLoadTimer);
+    
+    // Defer video play by 2.5 seconds to prevent immediate loading overhead
     if (aerovitVideo) {
-      aerovitVideo.play().catch(e => console.log("Auto-play prevented"));
+      videoLoadTimer = setTimeout(() => {
+        if (projectShowroom.classList.contains("active")) {
+          aerovitVideo.play().catch(e => console.log("Auto-play prevented"));
+        }
+      }, 2500);
     }
   }
   
@@ -312,6 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeShowroom() {
     projectShowroom.classList.remove("active");
     playBeep(300, 0.15, "triangle");
+    if (videoLoadTimer) clearTimeout(videoLoadTimer);
     if (aerovitVideo) {
       aerovitVideo.pause();
     }
