@@ -304,16 +304,16 @@ document.addEventListener("DOMContentLoaded", () => {
     projectShowroom.classList.add("active");
     playBeep(900, 0.15, "sine");
     
-    // Clear any previous loading timer
-    if (videoLoadTimer) clearTimeout(videoLoadTimer);
+    // Dynamically load the video source on first open (deferring loading from main page load)
+    const videoSource = document.getElementById("video-source");
+    if (aerovitVideo && videoSource && !videoSource.src) {
+      videoSource.src = videoSource.getAttribute("data-src");
+      aerovitVideo.load();
+    }
     
-    // Defer video play by 2.5 seconds to prevent immediate loading overhead
+    // Play video directly on user interaction thread to bypass browser autoplay blocks
     if (aerovitVideo) {
-      videoLoadTimer = setTimeout(() => {
-        if (projectShowroom.classList.contains("active")) {
-          aerovitVideo.play().catch(e => console.log("Auto-play prevented"));
-        }
-      }, 2500);
+      aerovitVideo.play().catch(e => console.log("Auto-play prevented", e));
     }
   }
   
@@ -323,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeShowroom() {
     projectShowroom.classList.remove("active");
     playBeep(300, 0.15, "triangle");
-    if (videoLoadTimer) clearTimeout(videoLoadTimer);
     if (aerovitVideo) {
       aerovitVideo.pause();
     }

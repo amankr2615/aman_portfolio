@@ -876,36 +876,96 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
     height: auto;
     overflow: visible;
   }
-  /* Center lamp on mobile */
+  /* Align both lamp and card side-by-side in one view on mobile */
   .lamp-assembly {
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    height: 52vh !important;
+    left: 6% !important;
+    transform: none !important;
+    width: 100px !important;
+    height: 48vh !important;
+    bottom: 8vh !important;
+  }
+  .lamp-base {
+    width: 60px !important;
+    height: 12px !important;
+    border: 2px solid #334155 !important;
+    border-bottom: none !important;
+  }
+  .lamp-pole {
+    width: 4px !important;
+    height: calc(48vh - 70px) !important;
+  }
+  .lamp-shade {
+    width: 80px !important;
+    height: 40px !important;
+  }
+  .lamp-bulb {
+    width: 20px !important;
+    height: 20px !important;
+    bottom: -10px !important;
+  }
+  .lamp-cord {
+    height: calc(100% - 40px) !important;
   }
   .light-cone {
-    left: 50% !important;
-    transform: translateX(-50%) scaleX(0) !important;
-    transform-origin: top center !important;
-    width: 100% !important;
-    height: 100vh !important;
-    background: radial-gradient(circle at 50% 25%, rgba(16, 185, 129, 0.3) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 80%) !important;
-    clip-path: none !important;
+    left: calc(6% + 40px) !important;
+    transform: scaleX(0) !important;
+    transform-origin: left center !important;
+    width: 85% !important;
+    height: 75vh !important;
+    background: radial-gradient(circle at 0% 25%, rgba(16, 185, 129, 0.28) 0%, rgba(139, 92, 246, 0.08) 35%, transparent 70%) !important;
+    clip-path: polygon(0 25%, 100% 0, 100% 100%, 0 100%) !important;
   }
   .lamp-assembly.on ~ .light-cone {
-    transform: translateX(-50%) scaleX(1) !important;
+    transform: scaleX(1) !important;
   }
-  /* Center revealed greeting card on mobile */
+  
+  /* Place greeting card on the right, scaled appropriately to fit in viewport */
   .revealed-content {
-    right: auto !important;
-    left: 50% !important;
-    bottom: 5vh !important;
-    transform: translate(-50%, 15px) !important;
-    width: 92% !important;
-    max-width: 440px !important;
-    padding: 1.4rem !important;
+    right: 4% !important;
+    left: auto !important;
+    bottom: 12vh !important;
+    transform: translateX(20px) !important;
+    width: 62% !important;
+    max-width: 250px !important;
+    padding: 1rem !important;
+    border-radius: 12px !important;
   }
   .lamp-assembly.on ~ .revealed-content {
-    transform: translate(-50%, 0) !important;
+    transform: translateX(0) !important;
+  }
+  .revealed-content .intro-name {
+    font-size: 1.6rem !important;
+    margin: 0.5rem 0 !important;
+  }
+  .revealed-content .intro-greeting {
+    font-size: 0.65rem !important;
+  }
+  .revealed-content .intro-avatar-frame {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .revealed-content .intro-badge {
+    font-size: 0.58rem !important;
+    padding: 0.25rem 0.5rem !important;
+  }
+  .revealed-content .btn-venture {
+    font-size: 0.62rem !important;
+    padding: 0.5rem 0.8rem !important;
+  }
+
+  /* Reposition 'Click to know me' text to the right side so it doesn't overlap the lamp */
+  .lamp-prompt {
+    left: 62% !important;
+    top: 50% !important;
+    font-size: 1.15rem !important;
+    transform: translate(-50%, -50%) !important;
+    width: 150px !important;
+    text-align: center !important;
+  }
+  .spinning-circle-loader {
+    width: 32px !important;
+    height: 32px !important;
+    margin-left: 0.4rem !important;
   }
 }
 
@@ -1231,14 +1291,15 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 
 .showroom-tab-btn {
   flex: 1;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1.5px solid transparent;
   border-radius: 6px;
   color: var(--color-text-dark);
   padding: 0.8rem;
   font-family: var(--font-retro);
   font-size: 0.9rem;
   cursor: pointer;
+  opacity: 0.45;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: center;
   letter-spacing: 0.5px;
@@ -1251,24 +1312,26 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 
 .showroom-tab-btn:hover {
   background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.15);
   color: var(--color-text-bright);
+  opacity: 0.8;
 }
 
 .showroom-tab-btn[data-project="aerovit"].active {
-  background: rgba(16, 185, 129, 0.08);
-  color: var(--color-neon-green);
-  border-color: var(--color-neon-green);
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
-  text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.16) !important;
+  color: var(--color-neon-green) !important;
+  border: 1.5px solid var(--color-neon-green) !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.25) !important;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.4) !important;
 }
 
 .showroom-tab-btn[data-project="kpi"].active {
-  background: rgba(167, 139, 250, 0.08);
-  color: var(--color-neon-purple);
-  border-color: var(--color-neon-purple);
-  box-shadow: 0 0 15px rgba(167, 139, 250, 0.25);
-  text-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+  background: rgba(167, 139, 250, 0.16) !important;
+  color: var(--color-neon-purple) !important;
+  border: 1.5px solid var(--color-neon-purple) !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.25) !important;
+  text-shadow: 0 0 8px rgba(167, 139, 250, 0.4) !important;
 }
 
 /* Tab content view */
@@ -1280,7 +1343,7 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
 
 .project-view {
   display: none;
-  height: 100%;
+  height: auto;
 }
 
 .project-view.active {
@@ -1291,7 +1354,7 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.2rem;
-  height: 100%;
+  height: auto;
 }
 
 @media (max-width: 900px) {
@@ -2340,6 +2403,20 @@ button, a, input, select, textarea, .avatar-container, .lamp-cord, .carousel-nav
   border-color: var(--color-neon-green);
   box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
   transform: translateY(-1px);
+}
+
+/* Numbered Project Index Labels */
+.tab-num {
+  font-family: var(--font-retro);
+  font-weight: bold;
+  font-size: 0.84rem;
+  opacity: 0.55;
+  margin-right: 0.3rem;
+}
+
+.showroom-tab-btn.active .tab-num {
+  opacity: 0.95;
+  color: inherit;
 }
 
 
