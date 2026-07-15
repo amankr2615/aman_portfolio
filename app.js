@@ -229,6 +229,14 @@ document.addEventListener("DOMContentLoaded", () => {
     landingContainer.classList.add("hidden");
     rpgDashboard.classList.add("active");
     
+    // Reset window and body scroll to top (handles mobile view shifts)
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    if (rpgDashboard) {
+      rpgDashboard.scrollTop = 0;
+    }
+    
     // Once opacity transition completes, remove from layout tree to save rendering cycles
     const handleTransitionEnd = (e) => {
       if (e.propertyName === "opacity" && landingContainer.classList.contains("hidden")) {
@@ -303,6 +311,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function openShowroom() {
     projectShowroom.classList.add("active");
     playBeep(900, 0.15, "sine");
+
+    // Force scroll position to the absolute top of showroom containers
+    const scrollContainers = projectShowroom.querySelectorAll(".showroom-content, .showroom-body, .project-view");
+    scrollContainers.forEach(container => {
+      container.scrollTop = 0;
+    });
     
     // Dynamically load the video source on first open by setting src directly on video element
     if (aerovitVideo && !aerovitVideo.src) {
@@ -330,8 +344,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  btnNavProjects.addEventListener("click", openShowroom);
-  btnCloseShowroom.addEventListener("click", closeShowroom);
+  btnNavProjects.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openShowroom();
+  });
+  
+  btnCloseShowroom.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeShowroom();
+  });
 
   // Architecture Modal Setup (AeroViT & KPI Projects)
   const achAerovit = document.getElementById("ach-aerovit");
@@ -625,6 +646,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle clicks anywhere on the left/right halves of the overlay window
     imageLightbox.addEventListener("click", (e) => {
+      // If clicking the dark backdrop container directly (outside the image content box), close it
+      if (e.target === imageLightbox || e.target.classList.contains("lightbox-overlay")) {
+        e.stopPropagation();
+        imageLightbox.classList.remove("active");
+        playBeep(300, 0.08, "triangle");
+        return;
+      }
+      
       // Exclude close button clicks from navigating slides
       if (e.target === btnCloseLightbox) return;
 
@@ -643,7 +672,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (btnCloseLightbox) {
-    btnCloseLightbox.addEventListener("click", () => {
+    btnCloseLightbox.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent click leaking to elements behind
       imageLightbox.classList.remove("active");
       playBeep(300, 0.08, "triangle");
     });
